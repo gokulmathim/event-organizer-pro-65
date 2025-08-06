@@ -1,8 +1,12 @@
 const express = require('express');
 const healthController = require('../controllers/health');
 
+const userRoutes = require('./user');
+const eventRoutes = require('./event');
+const attendeeRoutes = require('./attendee');
+const analyticsRoutes = require('./analytics');
+
 const router = express.Router();
-// Health endpoint
 
 /**
  * @swagger
@@ -31,5 +35,11 @@ const router = express.Router();
  *                   example: development
  */
 router.get('/', healthController.check.bind(healthController));
+
+// Route mounting
+router.use('/users', userRoutes);
+router.use('/events', eventRoutes);
+router.use('/', attendeeRoutes);
+router.use('/analytics', analyticsRoutes);
 
 module.exports = router;
